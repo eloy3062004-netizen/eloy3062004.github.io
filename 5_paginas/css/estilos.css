@@ -1,0 +1,35 @@
+body { background-position: center; 
+background-size: cover;
+background-repeat: no-repeat;
+overflow: hidden;
+background-color: #003958;
+font-family: "Jim Nightshade", cursive;
+}
+
+h1 {
+background-color: #53DAD6;
+color: black;
+text-align: center;
+text-shadow: 2px 2px 5px white;
+border-left: 10px solid #ff0000;
+}
+
+img {
+width: 300px;
+border: 3px solid black;
+box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+border-radius: 15px;
+text-align: center;
+}
+
+ul {
+list-style: none;
+}
+
+li {
+border: 5px solid black;
+display: flex;
+justify-content: center;
+display:inline-block
+}
+
