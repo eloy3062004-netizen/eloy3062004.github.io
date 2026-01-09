@@ -72,8 +72,8 @@ p {
   Punto 1: Los enlaces cambian de color de fondo y estan subrayados de color azul
   */
   /* necesitas 2 instrucciones*/
-  /*1: */
-  /*2: */
+  /*1: */ transition: background-color 0.3s ease;
+  /*2: */ text-decoration: underline;
 }
 
 #footer{
@@ -179,7 +179,7 @@ p {
   /* necesitas 2 instruccion*/
   /*1: */  
   /*2: */  
-  
+  overflow-y: scroll; overflow-x: hidden;
   height: 250px;
   text-align: justify;
   border: 5px solid black;
@@ -219,6 +219,7 @@ p {
     */
     /* necesitas 1 instruccion*/
     /*1: */
+  
     text-align: center;
     padding-bottom: 5px;
   }
@@ -229,6 +230,7 @@ p {
     */
     /* necesitas 1 instruccion*/
     /*1: */
+   
     text-align: center;
     clear: both;
   padding-bottom: 5px;
@@ -244,6 +246,7 @@ p {
     */
     /* necesitas 1 instruccion*/
     /*1: */
+ 
 
     text-align: center;
     margin-bottom: 40px;
