@@ -161,7 +161,7 @@ body {
 }
 
 .bloque-bienvenida {
-    display: inline-block;
+    display: block;
     max-width: 800px;
     padding: 20px 30px;
     border: 2px dashed #4caf50;
