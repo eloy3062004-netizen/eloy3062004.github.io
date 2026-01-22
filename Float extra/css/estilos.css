@@ -41,7 +41,7 @@ body {
 
 #hero {
     height: 260px;
-    background-image: url("../images/depositphotos_412663506-stock-illustration-cookie-logo-design-cookie-vector.jpg");
+    background-color: #2b2b2b;
     background-size: cover;
     background-attachment: fixed;
     margin-top: 70px;
