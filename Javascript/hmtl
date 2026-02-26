@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Página con JavaScript</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+    .card{background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.1);text-align:center}
+    button{padding:12px 20px;border:none;border-radius:12px;background:#2563eb;color:white;font-size:16px;cursor:pointer}
+    button:hover{opacity:.9}
+  </style>
+</head>
+<body>
+<div class="card">
+  <h1>Ejemplo de JavaScript</h1>
+  <p id="texto">Haz clic en el botón</p>
+  <button onclick="cambiarTexto()">Click aquí</button>
+</div>
+<script>
+  function cambiarTexto(){
+    const elemento = document.getElementById("texto");
+    elemento.textContent = "¡JavaScript se ejecutó correctamente! 🎉";
+  }
+</script>
+
+</body>
+</html>
