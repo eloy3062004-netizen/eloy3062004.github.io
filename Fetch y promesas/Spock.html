@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Spock</title>
+</head>
+<body>
+
+  <h1>Piedra, Papel, Tijera, Lagarto, Spock</h1>
+
+  <div class="container">
+    <select id="jugador">
+      <option value="">Escoge una</option>
+      <option value="piedra">Piedra</option>
+      <option value="papel">Papel</option>
+      <option value="tijera">Tijera</option>
+      <option value="lagarto">Lagarto</option>
+      <option value="spock">Spock</option>
+    </select>
+
+    <button id="jugar">Jugar</button>
+  </div>
+
+  <div id="resultado"></div>
+
+  <script>
+    const opciones = ["piedra", "papel", "tijera", "lagarto", "spock"];
+
+    const reglas = {
+      piedra: ["tijera", "lagarto"],
+      papel: ["piedra", "spock"],
+      tijera: ["papel", "lagarto"],
+      lagarto: ["spock", "papel"],
+      spock: ["tijera", "piedra"]
+    };
+
+    const boton = document.getElementById("jugar");
+    const resultado = document.getElementById("resultado");
+
+    boton.addEventListener("click", jugar);
+
+    function jugar() {
+      const jugador = document.getElementById("jugador").value;
+
+      if (!jugador) {
+        resultado.textContent = "Selecciona una opción";
+        return;
+        setTimeout(() => {
+ }, 1000); //cada segundo descuenta
+      }
+
+      const ordenador = opciones[Math.floor(Math.random() * opciones.length)];
+
+      quienGana(jugador, ordenador);
+    }
+
+    function quienGana(jugador, ordenador) {
+      let mensaje = "";
+
+      if (jugador === ordenador) {
+        mensaje = `JUGADOR: ${jugador} VS ORDENADOR: ${ordenador} ==> Empate!`;
+      } else if (reglas[jugador].includes(ordenador)) {
+        mensaje = `JUGADOR: ${jugador} VS ORDENADOR: ${ordenador} ==> Ganaste!`;
+      } else {
+        mensaje = `JUGADOR: ${jugador} VS ORDENADOR: ${ordenador} ==> Perdiste!`;
+      }
+
+      resultado.textContent = mensaje;
+    }
+  </script>
+
+</body>
+</html>
