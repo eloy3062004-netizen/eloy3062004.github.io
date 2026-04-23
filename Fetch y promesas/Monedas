@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Monedas</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      max-width: 600px;
+    }
+
+    li {
+      list-style: none;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      min-width: 100px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Conversor de Monedas</h1>
+
+  <div class="container">
+    <input type="number" id="cantidad" placeholder="Cantidad">
+
+    <select id="origen">
+      <option value="EUR">EUR</option>
+      <option value="USD">USD</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+    </select>
+
+    <button id="convertir">Convertir</button>
+  </div>
+
+  <ul id="resultado"></ul>
+
+  <script>
+    const boton = document.getElementById("convertir");
+
+    boton.addEventListener("click", convertirMonedas);
+
+    async function convertirMonedas() {
+      const cantidad = document.getElementById("cantidad").value;
+      const origen = document.getElementById("origen").value;
+
+      if (!cantidad || cantidad <= 0) {
+        alert("Dime una cantidad válida");
+        return;
+      }
+
+      try {
+        const url = `https://api.exchangerate-api.com/v4/latest/${origen}`;
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json();
+
+        mostrarResultados(cantidad, datos.rates);
+      } catch (error) {
+        alert("Error");
+        console.error(error);
+      }
+    }
+
+    function mostrarResultados(cantidad, rates) {
+      const ul = document.getElementById("resultado");
+      ul.innerHTML = "";
+
+      for (let moneda in rates) {
+        const valor = cantidad * rates[moneda];
+
+        const li = document.createElement("li");
+        li.textContent = `${moneda}: ${valor.toFixed(2)}`;
+
+        ul.appendChild(li);
+      }
+    }
+  </script>
+
+</body>
+</html>
