@@ -1,0 +1,95 @@
+<script>
+    let tiempoPensar=5;
+    const opciones = ["piedra", "papel", "tijera", "lagarto", "spock"];
+    const reglas = {
+            piedra: ["tijera", "lagarto"],
+            papel: ["piedra", "spock"],
+            tijera: ["papel", "lagarto"],
+            lagarto: ["spock", "papel"],
+            spock: ["tijera", "piedra"]
+        };
+    const listaOpciones = document.getElementById("playerChoice");
+    let jugadorEscoge;
+    let ordenadorEscoge;
+    const eleccionesEl = document.getElementById("elecciones");
+    const resultadoEl  = document.getElementById("resultado");
+    const btnReiniciar = document.getElementById("btnReiniciar");
+
+    listaOpciones.addEventListener("change", function() {
+        /*  ACABALO  */
+
+        jugadorEscoge = listaOpciones.value
+        quienGana(jugadorEscoge, ordenadorEscoge)
+
+        /*  FIN ACABALO  */            
+    });
+
+    // decide quien gana
+    function quienGana(jugador, ordenador) {
+        console.log("jugador: ", jugador, " ordenador: ", ordenador);
+
+        resultadoEl.className = "resultado-veredicto";
+
+        if (!jugador || !ordenador) {
+            eleccionesEl.innerHTML = jugador
+                ? `Tú elegiste: <span>${jugador}</span>. Espera a que el ordenador elija.`
+                : "Elige una opción para jugar.";
+            resultadoEl.textContent = "—";
+            resultadoEl.classList.add("veredicto-espera");
+            btnReiniciar.style.display = "none";
+            return;
+        }
+
+        eleccionesEl.innerHTML = `Tú elegiste: <span>${jugador}</span> &nbsp;|&nbsp; Ordenador eligió: <span>${ordenador}</span>`;
+
+        if (jugador === ordenador) {
+            resultadoEl.textContent = "¡Empate!";
+            resultadoEl.classList.add("veredicto-empate");
+        } else if (reglas[jugador] && reglas[jugador].includes(ordenador)) {
+            resultadoEl.textContent = "¡Ganaste!";
+            resultadoEl.classList.add("veredicto-ganaste");
+        } else if (reglas[ordenador] && reglas[ordenador].includes(jugador)) {
+            resultadoEl.textContent = "¡Perdiste!";
+            resultadoEl.classList.add("veredicto-perdiste");
+        } else {
+            resultadoEl.textContent = "Error en las reglas.";
+            resultadoEl.classList.add("veredicto-espera");
+        }
+
+        btnReiniciar.style.display = "block";
+    }
+
+    function reiniciar() {
+        jugadorEscoge = undefined;
+        ordenadorEscoge = undefined;
+        tiempoPensar = 5;
+        listaOpciones.value = "";
+        document.getElementById("ordenadorElige").textContent = "Ordenador Pensando elección ...";
+        eleccionesEl.innerHTML = "Elige una opción para jugar.";
+        resultadoEl.className = "resultado-veredicto veredicto-espera";
+        resultadoEl.textContent = "—";
+        btnReiniciar.style.display = "none";
+        descuenta();
+    }
+
+    //Promesa cuando pase el tiempo establecido el ordenador escoge
+    function descuenta(){
+        /*  ACABALO  */
+
+        let intervalo = setInterval(() => {
+            tiempoPensar--
+            document.getElementById("ordenadorElige").textContent = `Ordenador pensando... ${tiempoPensar}`
+
+            if (tiempoPensar <= 0) {
+                clearInterval(intervalo)
+                ordenadorEscoge = opciones[Math.floor(Math.random() * opciones.length)]
+                document.getElementById("ordenadorElige").textContent = `Ordenador eligió: ${ordenadorEscoge}`
+                quienGana(jugadorEscoge, ordenadorEscoge)
+            }
+        }, 1000)
+
+        /*  FIN ACABALO  */            
+    }
+
+    descuenta();
+</script>
